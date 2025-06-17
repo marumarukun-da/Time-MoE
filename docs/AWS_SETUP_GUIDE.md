@@ -61,6 +61,31 @@ which python
 # 期待: /home/ubuntu/time_moe_env/bin/python
 ```
 
+### 1.3.1 uv（高速パッケージマネージャー）の導入（推奨）
+
+**uvは次世代Pythonパッケージマネージャーで、pipより10-100倍高速に動作します。**
+
+```bash
+# uvのインストール
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source ~/.bashrc
+
+# uvバージョン確認
+uv --version
+
+# uvで仮想環境作成（従来の方法の代替）
+uv venv time_moe_env
+source time_moe_env/bin/activate
+
+# 仮想環境確認
+which python
+```
+
+**uvのメリット：**
+- ⚡ **高速性**: pipより10-100倍高速なインストール
+- 🔧 **pip互換**: 既存のpipコマンドがそのまま使用可能
+- 📦 **効率的依存関係解決**: より安定したパッケージ管理
+
 ### 1.4 PyTorchの確認
 
 ```bash
@@ -100,6 +125,7 @@ cd Time-MoE
 
 ### 2.2 依存関係のインストール
 
+**方法A: pip使用（従来の方法）**
 ```bash
 # 必要なパッケージのインストール
 pip install -r requirements.txt
@@ -108,8 +134,18 @@ pip install -r requirements.txt
 echo "依存関係インストール完了"
 ```
 
+**方法B: uv使用（推奨・高速）**
+```bash
+# uvを使用した高速インストール
+uv pip install -r requirements.txt
+
+# 進捗確認（通常1-2分で完了）
+echo "依存関係インストール完了"
+```
+
 ### 2.3 Flash Attentionのインストール（推奨）
 
+**方法A: pip使用**
 ```bash
 # 事前準備
 pip install packaging ninja
@@ -117,8 +153,20 @@ pip install packaging ninja
 # Flash Attentionインストール（10-15分かかる場合があります）
 echo "Flash Attentionをインストール中... 時間がかかる場合があります"
 MAX_JOBS=4 pip install flash-attn==2.6.3 --no-build-isolation
+```
 
-# インストール確認
+**方法B: uv使用（推奨・高速）**
+```bash
+# 事前準備
+uv pip install packaging ninja
+
+# Flash Attentionインストール（uvでも高速化）
+echo "Flash Attentionをインストール中..."
+MAX_JOBS=4 uv pip install flash-attn==2.6.3 --no-build-isolation
+```
+
+**インストール確認（共通）**
+```bash
 python3 -c "
 try:
     import flash_attn
@@ -422,13 +470,21 @@ export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
 which python
 source time_moe_env/bin/activate
 
-# 依存関係の再インストール
+# 依存関係の再インストール（pip使用）
 pip install -r requirements.txt --force-reinstall
+
+# または uv使用（推奨・高速）
+uv pip install -r requirements.txt --force-reinstall
 
 # transformersバージョン確認
 pip show transformers
-# バージョンが4.40.1でない場合
+# または
+uv pip show transformers
+
+# バージョンが4.40.1でない場合（pip）
 pip install transformers==4.40.1 --force-reinstall
+# または uv使用
+uv pip install transformers==4.40.1 --force-reinstall
 ```
 
 #### 4.1.4 ネットワーク接続エラー
