@@ -4,8 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Important: This CLAUDE.md file should be updated whenever there are repository updates that introduce new commands, architectural changes, or development workflows that would be helpful for future Claude Code instances.**
 
-## Fine-tuning Guide
+## Documentation Guides
 
+### Fine-tuning Guide
 A comprehensive fine-tuning guide is available in `docs/FINE_TUNING_GUIDE.md` which provides detailed instructions for:
 - Data preparation and format requirements
 - Step-by-step fine-tuning procedures
@@ -13,7 +14,16 @@ A comprehensive fine-tuning guide is available in `docs/FINE_TUNING_GUIDE.md` wh
 - Practical examples with real datasets
 - Troubleshooting common issues
 
-Refer to this guide when helping users fine-tune Time-MoE on their custom time series data.
+### AWS GPU Setup Guide
+A complete AWS GPU environment setup guide is available in `docs/AWS_SETUP_GUIDE.md` which covers:
+- AWS account setup and GPU instance selection
+- SSH connection and security configuration
+- Environment setup (CUDA, Python, dependencies)
+- Time-MoE installation and verification
+- Cost management and troubleshooting
+- Designed for non-engineers with detailed step-by-step instructions
+
+Refer to these guides when helping users set up and fine-tune Time-MoE on their custom time series data.
 
 ## Project Overview
 
